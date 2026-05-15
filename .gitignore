@@ -1,0 +1,11 @@
+target/
+frontend/
+apache-tomcat-*/
+backend/
+**/logs/
+**/work/
+**/temp/
+.env
+.idea/
+.vscode/
+*.class

@@ -1,0 +1,10 @@
+May 15, 2026 4:07:43 PM org.apache.coyote.AbstractProtocol init
+INFO: Initializing ProtocolHandler ["http-nio-8080"]
+May 15, 2026 4:07:43 PM org.apache.catalina.core.StandardService startInternal
+INFO: Starting service [Tomcat]
+May 15, 2026 4:07:43 PM org.apache.catalina.core.StandardEngine startInternal
+INFO: Starting Servlet engine: [Apache Tomcat/10.1.41]
+Server started...
+service runningMay 15, 2026 4:07:44 PM org.apache.coyote.AbstractProtocol start
+INFO: Starting ProtocolHandler ["http-nio-8080"]
+Server started on port 8080

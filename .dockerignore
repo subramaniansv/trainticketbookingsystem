@@ -1,0 +1,12 @@
+target/
+.idea/
+.vscode/
+*.iml
+apache-tomcat-*/
+backend/
+frontend/
+**/logs/
+**/work/
+**/temp/
+.git/
+.gitignore
