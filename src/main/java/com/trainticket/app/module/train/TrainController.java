@@ -1,5 +1,6 @@
 package com.trainticket.app.module.train;
 
+import com.trainticket.app.common.JsonUtil;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
@@ -179,7 +180,7 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response)
 
 	private void sendResponse(ApiResponse response, HttpServletResponse resp) {
 		try {
-			ObjectMapper mapper = new ObjectMapper();
+			ObjectMapper mapper = JsonUtil.mapper();
 			resp.getWriter().write(mapper.writeValueAsString(response));
 			resp.setStatus(response.getStatusCode());
 		} catch (Exception e) {

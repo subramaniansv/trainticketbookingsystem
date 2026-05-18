@@ -1,5 +1,6 @@
 package com.trainticket.app.module.booking;
 
+import com.trainticket.app.common.JsonUtil;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
@@ -87,7 +88,7 @@ public class BookingController extends HttpServlet {
 
 	private void sendResponse(ApiResponse response, HttpServletResponse resp) {
 		try {
-			ObjectMapper mapper = new ObjectMapper();
+			ObjectMapper mapper = JsonUtil.mapper();
 			resp.getWriter().write(mapper.writeValueAsString(response));
 			resp.setStatus(response.getStatusCode());
 		} catch (Exception e) {

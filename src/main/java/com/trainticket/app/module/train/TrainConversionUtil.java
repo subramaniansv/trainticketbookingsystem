@@ -1,5 +1,6 @@
 package com.trainticket.app.module.train;
 
+import com.trainticket.app.common.JsonUtil;
 import jakarta.servlet.http.HttpServletRequest;
 import java.util.*;
 
@@ -7,7 +8,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class TrainConversionUtil {
 
-    private static final ObjectMapper mapper = new ObjectMapper();
+    private static final ObjectMapper mapper = JsonUtil.mapper();
 
 
     public static String dtoToString(TrainDTO dto){
@@ -22,7 +23,7 @@ public class TrainConversionUtil {
 
 public static TrainDTO requestToTrainDto(HttpServletRequest request) {
     try {
-        ObjectMapper mapper = new ObjectMapper();
+        ObjectMapper mapper = JsonUtil.mapper();
         return mapper.readValue(request.getInputStream(), TrainDTO.class);
     } catch (Exception e) {
         throw new RuntimeException("Failed to parse request JSON", e);

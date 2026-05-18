@@ -1,4 +1,5 @@
 package com.trainticket.app.module.schedule;
+import com.trainticket.app.common.JsonUtil;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -17,7 +18,7 @@ public class ScheduleController extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     ScheduleRepository repository = new ScheduleRepository();
-ObjectMapper mapper = new ObjectMapper();
+ObjectMapper mapper = JsonUtil.mapper();
     public ScheduleController() {
         super();
     }

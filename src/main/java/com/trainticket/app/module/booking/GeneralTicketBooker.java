@@ -1,5 +1,6 @@
 package com.trainticket.app.module.booking;
 
+import com.trainticket.app.common.JsonUtil;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -11,7 +12,7 @@ public class GeneralTicketBooker {
 
     CreateBooking create = new CreateBooking();
     Waiting wait = new Waiting();
-    ObjectMapper mapper = new ObjectMapper();
+    ObjectMapper mapper = JsonUtil.mapper();
 
     public BookingDto bookNormalTicket(BookingDto booking) {
         Connection connection = null;
