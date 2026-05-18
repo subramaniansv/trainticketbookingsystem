@@ -40,7 +40,6 @@ public class StationController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-				setCors(response);
 		StationDto station = StationConverterUtil.requestToDto(request);
 		if (station == null) {
 			sendResponse(new ApiResponse(false, "invalid data ", null, 500), response);
@@ -58,7 +57,6 @@ public class StationController extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-				setCors(response);
 
 		Long id = null;
 		String name = request.getParameter("name");
@@ -123,7 +121,6 @@ public class StationController extends HttpServlet {
 
 	protected void doPut(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-				setCors(response);
 
 		// TODO Auto-generated method stub
 		try {
@@ -169,7 +166,6 @@ public class StationController extends HttpServlet {
 	protected void doDelete(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-				setCors(response);
 
 		try {
 			if(request.getParameter("stationId")== null){
@@ -203,9 +199,4 @@ public class StationController extends HttpServlet {
 			System.out.println("Exception at response writer" + e);
 		}
 	}
-	private void setCors(HttpServletResponse response) {
-    response.setHeader("Access-Control-Allow-Origin", "http://localhost:5173");
-    response.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
-    response.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
-}
 }
