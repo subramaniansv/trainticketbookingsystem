@@ -16,7 +16,12 @@ public class CorsFilter implements Filter {
         HttpServletResponse res = (HttpServletResponse) response;
         HttpServletRequest req = (HttpServletRequest) request;
         String allowedURL = System.getenv("url");
-        System.out.println("url given"+allowedURL+"url hitted"+req.getRequestURL());
+        String origin = req.getHeader("Origin");
+        System.out.println("[CORS] env url=[" + allowedURL + "]"
+                + " | request Origin=[" + origin + "]"
+                + " | method=" + req.getMethod()
+                + " | path=" + req.getRequestURL()
+                + " | match=" + (allowedURL != null && allowedURL.equals(origin)));
         res.setHeader("Access-Control-Allow-Origin", allowedURL);
         res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
         res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
