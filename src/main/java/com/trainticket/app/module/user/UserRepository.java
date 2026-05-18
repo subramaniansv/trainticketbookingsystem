@@ -7,8 +7,8 @@ import com.trainticket.app.config.DBConfig;
 
 public class UserRepository implements Repository<UserDTO> {
         public UserDTO save(UserDTO userDTO) {
-                String insert = "insert into  user(name,email,is_disabled,address,password) values(?,?,?,?,?)";
-                String update = "update user set name =?,email=?,is_diabled =?,address=?,password=? where user_id =?";
+                String insert = "insert into users(name,email,is_disabled,address,password) values(?,?,?,?,?)";
+                String update = "update users set name =?,email=?,is_disabled =?,address=?,password=? where user_id =?";
                 try (Connection connection = DBConfig.getConnection();) {
                         if (userDTO.getId() != null) {
                                 PreparedStatement preparedStatement = connection.prepareStatement(update);
@@ -44,7 +44,7 @@ public class UserRepository implements Repository<UserDTO> {
         }
 
         public UserDTO findById(Long id) {
-                String sql = "select * from user where user_id=?";
+                String sql = "select * from users where user_id=?";
                 UserDTO userDTO = null;
                 try (Connection connection = DBConfig.getConnection();
                                 PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
@@ -67,7 +67,7 @@ public class UserRepository implements Repository<UserDTO> {
         }
 
         public List<UserDTO> findAll() {
-                String sql = "Select * from user";
+                String sql = "Select * from users";
                 List<UserDTO> users = new ArrayList<>();
                 try (Connection connection = DBConfig.getConnection();
                                 PreparedStatement preparedStatement = connection.prepareStatement(sql);) {
@@ -90,7 +90,7 @@ public class UserRepository implements Repository<UserDTO> {
         }
 
         public UserDTO getUserByEmail(String email,String password){
-                String sql = "Select * from user where email = ?";
+                String sql = "Select * from users where email = ?";
                 UserDTO userDTO = null;
                 try (Connection connection = DBConfig.getConnection()){
                         PreparedStatement ps = connection.prepareStatement(sql);
@@ -128,7 +128,7 @@ public class UserRepository implements Repository<UserDTO> {
 @Override
     
 public void deleteById(Long id) {
-        String sql = "Delete from user where user_id =?";
+        String sql = "Delete from users where user_id =?";
         try (Connection connection = DBConfig.getConnection();
                 PreparedStatement ps = connection.prepareStatement(sql)) {
             ps.setLong(1, id);
@@ -143,7 +143,7 @@ public void deleteById(Long id) {
 
     @Override
     public boolean existsById(Long id) {
-        String sql = "Select 1 from user where user_id=?";
+        String sql = "Select 1 from users where user_id=?";
         try (Connection connection = DBConfig.getConnection();
                 PreparedStatement ps = connection.prepareStatement(sql);) {
             ps.setLong(1, id);

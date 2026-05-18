@@ -1,10 +1,48 @@
-May 15, 2026 4:07:43 PM org.apache.coyote.AbstractProtocol init
+May 18, 2026 9:11:20 AM org.apache.coyote.AbstractProtocol init
 INFO: Initializing ProtocolHandler ["http-nio-8080"]
-May 15, 2026 4:07:43 PM org.apache.catalina.core.StandardService startInternal
+May 18, 2026 9:11:20 AM org.apache.catalina.core.StandardService startInternal
 INFO: Starting service [Tomcat]
-May 15, 2026 4:07:43 PM org.apache.catalina.core.StandardEngine startInternal
+May 18, 2026 9:11:20 AM org.apache.catalina.core.StandardEngine startInternal
 INFO: Starting Servlet engine: [Apache Tomcat/10.1.41]
 Server started...
-service runningMay 15, 2026 4:07:44 PM org.apache.coyote.AbstractProtocol start
+service runningorg.postgresql.util.PSQLException: ERROR: syntax error at or near "w"
+  Position: 8
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2725)
+	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2412)
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:371)
+	at org.postgresql.jdbc.PgStatement.executeInternal(PgStatement.java:502)
+	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:419)
+	at org.postgresql.jdbc.PgPreparedStatement.executeWithFlags(PgPreparedStatement.java:194)
+	at org.postgresql.jdbc.PgPreparedStatement.executeUpdate(PgPreparedStatement.java:155)
+	at com.trainticket.app.module.booking.UpdateBookingStatus.updateBooking(UpdateBookingStatus.java:29)
+	at com.trainticket.app.executor.BookingUpdater.lambda$startScheduler$0(BookingUpdater.java:13)
+	at com.trainticket.app.executor.BookingUpdater.startScheduler(BookingUpdater.java:19)
+	at com.trainticket.app.listener.AppStartupListener.contextInitialized(AppStartupListener.java:15)
+	at org.apache.catalina.core.StandardContext.listenerStart(StandardContext.java:4046)
+	at org.apache.catalina.core.StandardContext.startInternal(StandardContext.java:4474)
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:164)
+	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1203)
+	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1193)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at org.apache.tomcat.util.threads.InlineExecutorService.execute(InlineExecutorService.java:75)
+	at java.base/java.util.concurrent.AbstractExecutorService.submit(AbstractExecutorService.java:145)
+	at org.apache.catalina.core.ContainerBase.startInternal(ContainerBase.java:749)
+	at org.apache.catalina.core.StandardHost.startInternal(StandardHost.java:772)
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:164)
+	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1203)
+	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1193)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at org.apache.tomcat.util.threads.InlineExecutorService.execute(InlineExecutorService.java:75)
+	at java.base/java.util.concurrent.AbstractExecutorService.submit(AbstractExecutorService.java:145)
+	at org.apache.catalina.core.ContainerBase.startInternal(ContainerBase.java:749)
+	at org.apache.catalina.core.StandardEngine.startInternal(StandardEngine.java:203)
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:164)
+	at org.apache.catalina.core.StandardService.startInternal(StandardService.java:412)
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:164)
+	at org.apache.catalina.core.StandardServer.startInternal(StandardServer.java:870)
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:164)
+	at org.apache.catalina.startup.Tomcat.start(Tomcat.java:438)
+	at com.trainticket.app.Main.main(Main.java:87)
+May 18, 2026 9:11:29 AM org.apache.coyote.AbstractProtocol start
 INFO: Starting ProtocolHandler ["http-nio-8080"]
 Server started on port 8080

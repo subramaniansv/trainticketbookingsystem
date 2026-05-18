@@ -15,7 +15,7 @@ public class BookingHistory {
                     w.waiting_count, w.waiting_id,  u.name AS user_name, r.source_id, r.destination_id,
                     s1.name AS source_station,
                     s2.name AS destination_station
-                FROM booking b JOIN route r ON r.route_id = b.route_id JOIN station s1 ON s1.station_id = r.source_id JOIN station s2  ON s2.station_id = r.destination_id  LEFT JOIN waitings w ON b.booking_id = w.booking_id JOIN user u ON u.user_id = b.user_id WHERE b.user_id = ?
+                FROM booking b JOIN route r ON r.route_id = b.route_id JOIN station s1 ON s1.station_id = r.source_id JOIN station s2  ON s2.station_id = r.destination_id  LEFT JOIN waitings w ON b.booking_id = w.booking_id JOIN users u ON u.user_id = b.user_id WHERE b.user_id = ?
                 ORDER BY b.booking_date DESC;""";
         try (Connection connection = DBConfig.getConnection();) {
             PreparedStatement ps = connection.prepareStatement(sql);
@@ -55,7 +55,7 @@ public class BookingHistory {
                     b.train_id,
                     b.route_id,
                     b.schedule_id, b.booking_date, b.seat_count,  b.status, w.waiting_count,  w.waiting_id,  u.name AS user_name,  r.source_id, r.destination_id, s1.name AS source_station, s2.name AS destination_station
-                FROM booking b JOIN route r ON r.route_id = b.route_id JOIN station s1 ON s1.station_id = r.source_id JOIN station s2  ON s2.station_id = r.destination_id  LEFT JOIN waitings w ON b.booking_id = w.booking_id JOIN user u ON u.user_id = b.user_id WHERE  b.booking_id=?;""";
+                FROM booking b JOIN route r ON r.route_id = b.route_id JOIN station s1 ON s1.station_id = r.source_id JOIN station s2  ON s2.station_id = r.destination_id  LEFT JOIN waitings w ON b.booking_id = w.booking_id JOIN users u ON u.user_id = b.user_id WHERE  b.booking_id=?;""";
         try (Connection connection = DBConfig.getConnection()) {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setLong(1, bookingId);

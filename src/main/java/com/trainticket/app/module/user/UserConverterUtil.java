@@ -30,7 +30,8 @@ public static UserDTO requestToDto(HttpServletRequest request) {
         ObjectMapper mapper = new ObjectMapper();
         return mapper.readValue(request.getInputStream(), UserDTO.class);
     } catch (Exception e) {
-        throw new RuntimeException("Failed to parse request JSON", e);
+        System.out.println("Failed to parse request JSON: " + e.getMessage());
+        return null;
     }
 }
 

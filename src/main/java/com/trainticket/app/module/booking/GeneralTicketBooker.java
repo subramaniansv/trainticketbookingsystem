@@ -86,7 +86,7 @@ public class GeneralTicketBooker {
                     SELECT u.name AS user_name, s1.name AS source_name, s2.name AS destination_name FROM route r
                     JOIN station s1 ON r.source_id = s1.station_id
                     JOIN station s2 ON r.destination_id = s2.station_id
-                    JOIN user u ON u.user_id = ?   WHERE r.route_id = ?
+                    JOIN users u ON u.user_id = ?   WHERE r.route_id = ?
                     """;
 
             PreparedStatement infoPs = connection.prepareStatement(infoSql);

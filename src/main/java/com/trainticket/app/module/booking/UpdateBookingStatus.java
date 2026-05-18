@@ -16,7 +16,7 @@ public class UpdateBookingStatus {
                                 """;
 
         String sql2 = """
-                delete w  from waitings w join booking b on b.booking_id = w.booking_id where b.status = 'REFUNDED'
+                DELETE FROM waitings w USING booking b WHERE b.booking_id = w.booking_id AND b.status = 'REFUNDED'
                 """;
         try {
             connection = DBConfig.getConnection();
