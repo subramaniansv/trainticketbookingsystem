@@ -39,7 +39,6 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response)
 	Long routeId = null;
 
     try {
-		System.out.println(pathInfo.substring(1)+"path info");
         if(pathInfo != null && !pathInfo.equals("/")){
             id = Long.parseLong(pathInfo.substring(1));
         }
