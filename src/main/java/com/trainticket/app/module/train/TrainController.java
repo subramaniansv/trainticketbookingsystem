@@ -74,7 +74,7 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response)
         }
 
     } catch(Exception e){
-
+		System.out.println(e);
         sendResponse(new ApiResponse(false,"Invalid train id",null,400),response);
 
     }
