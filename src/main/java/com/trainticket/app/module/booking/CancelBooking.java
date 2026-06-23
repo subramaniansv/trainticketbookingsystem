@@ -18,6 +18,7 @@ public class CancelBooking {
         String reduceBookedCountNormal = "update schedule set booked_seats = ? where schedule_id =?";
         String reduceBookedCountTatkal = "update schedule set tatkal_booked_seats = ? where schedule_id =?";
         String getBookedCount = "select booked_seats,tatkal_booked_seats from schedule where schedule_id=? ";
+        String decrementWaitingCountSql = "update waitings set waiting_count = waiting_count - 1 where schedule_id = ? and waiting_type = ? and waiting_count > (select waiting_count from waitings where booking_id = ?)";
         Connection connection = null;
         try {
             System.out.println("inside the cancel booking");
@@ -36,6 +37,14 @@ public class CancelBooking {
             }
 
             if (bookingDto.getStatus().equals(Status.TATKALWAITING) || bookingDto.getStatus().equals(Status.WAITING)) {
+                // Decrement waiting count for remaining waitings on this schedule
+                String waitingType = bookingDto.getStatus().equals(Status.TATKALWAITING) ? "TATKALWAITING" : "WAITING";
+                try (PreparedStatement decrementPs = connection.prepareStatement(decrementWaitingCountSql)) {
+                    decrementPs.setLong(1, bookingDto.getScheduleId());
+                    decrementPs.setString(2, waitingType);
+                    decrementPs.setLong(3, bookingDto.getBookingId());
+                    decrementPs.executeUpdate();
+                }
                 connection.commit();
                 connection.setAutoCommit(true);
                 return;
@@ -158,11 +167,12 @@ public class CancelBooking {
         int newBookedSeats = 0;
         String updateBooking = "update booking set status =? where booking_id =?";
         String waitingRemover = "delete from waitings where booking_id =?";
+        String updateWaitingCountSql = "update waitings set waiting_count = waiting_count - 1 where schedule_id = ? and waiting_type = ? and waiting_count > (select waiting_count from waitings where booking_id = ?)";
 
         try (
             PreparedStatement updateBookingPS = connection.prepareStatement(updateBooking);
             PreparedStatement waitingRemoverPS = connection.prepareStatement(waitingRemover);
-            
+            PreparedStatement updateWaitingCountPS = connection.prepareStatement(updateWaitingCountSql);
         ) {
             for (WaitingListHeplerDto waiter : waitingList) {
                 if (seatsAvailable < 1) {
@@ -183,6 +193,13 @@ public class CancelBooking {
 
                 waitingRemoverPS.setLong(1, waiter.waitingId);
                 waitingRemoverPS.executeUpdate();
+
+                // Decrement waiting count for remaining waitings on this schedule
+                String waitingType = cancelledBooking.getStatus().equals(Status.TATKALCONFIRMED) ? "TATKALWAITING" : "WAITING";
+                updateWaitingCountPS.setLong(1, cancelledBooking.getScheduleId());
+                updateWaitingCountPS.setString(2, waitingType);
+                updateWaitingCountPS.setLong(3, waiter.bookingId);
+                updateWaitingCountPS.executeUpdate();
 
                 seatsAvailable -= waiter.seatCount;
             }
